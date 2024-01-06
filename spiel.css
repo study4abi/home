@@ -1,0 +1,81 @@
+body {
+  background-color: rgb(22, 22, 22);
+  color: white;
+  font-family: 'Inter', sans-serif;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.choices {
+  display: flex;
+  flex-direction: row;
+}
+
+.one-choice {
+  margin: 20px 10px;
+}
+
+.scissors {
+  width: 50px;
+}
+
+.rock {
+  width: 50px;
+}
+
+.paper {
+  width: 50px;
+}
+
+.scissors-button {
+  background-color: rgb(22, 22, 22);
+  border-radius: 60px;
+  height: 120px;
+  width: 120px;
+  border: white solid 3px;
+}
+
+.scissors-button:hover {
+  cursor: pointer;
+}
+
+.rock-button {
+  background-color: rgb(22, 22, 22);
+  border-radius: 60px;
+  height: 120px;
+  width: 120px;
+  border: white solid 3px;
+}
+
+.rock-button:hover {
+  cursor: pointer;
+}
+
+.paper-button {
+  background-color: rgb(22, 22, 22);
+  border-radius: 60px;
+  height: 120px;
+  width: 120px;
+  border: white solid 3px;
+}
+
+.paper-button:hover {
+  cursor: pointer;
+}
+
+.standings {
+  font-weight: 300;
+}
+
+.moves {
+  font-weight: 300;
+}

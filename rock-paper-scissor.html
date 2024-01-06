@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test</title>
+    <link rel="stylesheet" href="spiel.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500&display=swap" rel="stylesheet">
+  </head>
+  <body>
+
+    <div class="game">
+
+    <p class="title">Schere Stein Papier</p>
+
+<div class="choices">
+  <div class="one-choice">
+  <button onclick="
+    playerMove = 'Schere';
+    playGame(playerMove);"
+    class = "scissors-button">
+    <img class="scissors" src="scissors-emoji.png" >
+  </button>
+  </div>
+
+  <div class="one-choice">
+  <button onclick="
+    playerMove = 'Stein';
+    playGame(playerMove);"
+    class = "rock-button">
+    <img class="rock" src="rock-emoji.png">
+  </button>
+</div>
+  
+<div class="one-choice">
+  <button onclick="
+    playerMove = 'Papier'
+    playGame(playerMove);"
+    class = "paper-button">
+    <img class="paper" src="paper-emoji.png">
+  </button><br><br>
+</div>
+</div>
+  <p class = "standings"></p>
+  <p class = "moves"></p><br>
+
+  <button onclick="
+    resetGame();
+  ">
+    Reset
+  </button>
+
+</div>
+  <script>
+    
+
+      let playerMove = '';
+      let computerMove = '';
+      let computerPresetMove = '';
+
+      let score = JSON.parse(localStorage.getItem('score')) || {
+        win: 0,
+        lose: 0,
+        tie: 0
+      };
+      
+      updateScore();
+  
+
+      if (!score) {
+        score = {
+        win: 0,
+        lose: 0,
+        tie: 0
+        }
+      };
+
+      console.log(score);
+
+    function updateScore() {
+      document.querySelector('.standings').innerHTML = 
+      `Du: ${score.win + score.tie} | Computer: ${score.lose + score.tie}`;
+    };
+
+    function move() {
+      document.querySelector('.moves').innerHTML = 
+      `Du hast ${playerMove} genommen. Computer hat ${computerPresetMove} genommen.`;
+    };
+
+    function resetGame() {
+      score.win = 0;
+      score.lose = 0;
+      score.tie = 0;
+      localStorage.removeItem('score');
+      console.log(`Points are reseted.`);
+      console.log(`Wins: ${score.win} | Losses: ${score.lose} | Ties: ${score.tie}`);
+      document.querySelector('.standings').innerHTML = 
+      `Du: ${score.win + score.tie} | Computer: ${score.lose + score.tie}`;
+    };
+        
+    function computerPick() {
+        let randomNumber = Math.random() * 3 ;
+
+        if (randomNumber <= 1) {
+          computerPresetMove = 'Schere';
+        } else if (randomNumber <= 2) {
+          computerPresetMove = 'Stein';
+        } else if (randomNumber <= 3) {
+          computerPresetMove = 'Papier';
+        }
+      };
+
+    function playGame(playerMove) {
+
+      let result = '';
+      
+      computerPick();
+
+      if (playerMove === 'Schere') {
+        if (computerPresetMove === 'Schere') {
+          result = `Unentschieden!`;
+          move();
+        } else if (computerPresetMove === 'Stein') {
+          result = `Du verlierst!`;
+          move();
+        } else if (computerPresetMove === 'Papier') {
+          result = `Du gewinnst!`;
+          move();
+        }
+      } else if (playerMove === 'Stein') {
+        if (computerPresetMove === 'Schere') {
+          result = `Du gewinnst!`;
+          move();
+        } else if (computerPresetMove === 'Stein') {
+          result = `Unentschieden!`;
+          move();
+        } else if (computerPresetMove === 'Papier') {
+          result = `Du verlierst!`;
+          move();
+        }
+      } else if (playerMove === 'Papier') {
+        if (computerPresetMove === 'Schere') {
+          result = `Du verlierst!`;
+          move();
+        } else if (computerPresetMove === 'Stein') {
+          result = `Du gewinnst!`;
+          move();
+        } else if (computerPresetMove === 'Papier') {
+          result = `Unentschieden!`;
+          move();
+        }
+      }
+
+        if (result === 'Du gewinnst!') {
+            score.win += 1;
+            updateScore();
+          } else if (result === 'Du verlierst!') {
+            score.lose += 1;
+            updateScore();
+          } else if (result === 'Unentschieden!') {
+            score.tie += 1;
+            updateScore();
+       };
+      
+      localStorage.setItem('score', JSON.stringify(score));
+
+      console.log(`Du hast ${playerMove} genommen. Computer hat ${computerPresetMove} genommen. ${result}`);
+
+      console.log(`Wins: ${score.win} | Lose: ${score.lose} | Ties: ${score.tie}`);
+  };
+
+  </script>
+  </body>
+</html>
