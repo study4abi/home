@@ -79,3 +79,11 @@ body {
 .moves {
   font-weight: 300;
 }
+
+.reset {
+  background-color: white;
+  border: none;
+  width: 100px;
+  height: 25px;
+  border-radius: 2px;
+}
